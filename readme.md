@@ -168,3 +168,13 @@ Users should be able to create a diet and configure it according to meals nutrit
   2. User create a new diet menu.
   3. The meal code added to the diet menu.
 
+
+
+
+
+
+
+
+-----------------------------------------------
+- [] Performans iyileştirmeleri - Axios işlemlerini kontrol et
+- [] Performans iyileştirmeleri - Dynamic Import dene

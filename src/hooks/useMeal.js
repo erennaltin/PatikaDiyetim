@@ -5,7 +5,6 @@ const useMeal = uri => {
   const [loading, setLoading] = useState(true);
   const [meal, setMeal] = useState('');
   const [error, setError] = useState(null);
-
   useEffect(() => {
     axios
       .get(uri)

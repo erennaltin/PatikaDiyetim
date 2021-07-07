@@ -16,8 +16,9 @@ const styles = StyleSheet.create({
     height: 300,
   },
   mainContainerSmall: {
-    width: '45%',
+    width: 150,
     height: 150,
+    marginRight: sizes.margin.Medium,
   },
   image: {
     width: '100%',

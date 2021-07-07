@@ -21,6 +21,13 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: sizes.fontSize.Standart,
   },
+  todaysKitchenContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  flagIcon: {
+    marginLeft: sizes.margin.Small,
+  },
 });
 
 export default styles;
