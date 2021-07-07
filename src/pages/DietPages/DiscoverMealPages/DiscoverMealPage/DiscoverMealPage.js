@@ -5,6 +5,7 @@ import MealContainer from './../../../../components/MealContainer/MealContainer'
 import useMeal from './../../../../hooks/useMeal';
 import {ActivityIndicator} from 'react-native-paper';
 import {colors} from '../../../../styles';
+import Turkish from '../../../../assets/icons/flags/Turkish.svg';
 
 export default function DiscoverMealPage() {
   const [loading, setLoading] = useState(true);
@@ -47,10 +48,12 @@ export default function DiscoverMealPage() {
 
   // Kitchen's list handling
   useEffect(() => {
-    const length = kitchenList.length;
-    let day = new Date().getDate();
-    day = day >= length ? 31 - day : day;
-    setKitchen(kitchenList[day].strArea);
+    if (kitchenList !== '') {
+      const length = kitchenList.length;
+      let day = new Date().getDate();
+      day = day >= length ? 31 - day : day;
+      setKitchen(kitchenList[day].strArea);
+    }
   }, [kitchenList]);
 
   if (loading) {
@@ -69,6 +72,7 @@ export default function DiscoverMealPage() {
         <View style={styles.horizontalMenu}>
           <Text style={styles.todaysKitchen}>
             {`Kitchen of Today: ${todaysKitchen}`}
+            <Turkish width={16} height={16} />
           </Text>
         </View>
         <MealContainer size="Small" meal={randomMeal[0]} />
