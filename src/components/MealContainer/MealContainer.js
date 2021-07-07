@@ -1,26 +1,43 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {View, Text, TouchableWithoutFeedback, Image} from 'react-native';
 import styles from './MealContainer.style';
 
-export default function MealContainer({size, meal}) {
+export default function MealContainer({size, meal, mainNavigation}) {
+  const [calories, setCalories] = useState(0);
+
+  const goModal = () => {
+    mainNavigation.navigate('MealInformation', {
+      mealId: meal.id,
+    });
+  };
+
+  useEffect(() => {
+    if (size === 'Large' && meal.id) {
+      const words = meal.summary.split(' ');
+      const index = words.indexOf('calories</b>,');
+      const calorie = words[index - 1].split('>')[1];
+      setCalories(calorie);
+    }
+  }, [meal, size]);
+
   return (
-    <TouchableWithoutFeedback style={styles.outerContainer}>
+    <TouchableWithoutFeedback style={styles.outerContainer} onPress={goModal}>
       <View style={[styles.mainContainer, styles[`mainContainer${size}`]]}>
         <Image
           style={styles.image}
           source={{
-            uri: meal.strMealThumb,
+            uri: meal.image,
           }}
         />
         <View style={styles.mealInformationContainer}>
           <Text
             numberOfLines={1}
             style={[styles.mealName, styles[`mealName${size}`]]}>
-            {meal.strMeal}
+            {meal.title}
           </Text>
           {size === 'Large' && (
             <Text style={[styles.mealCategory, styles[`mealCategory${size}`]]}>
-              {meal.strCategory}
+              {calories}
             </Text>
           )}
         </View>

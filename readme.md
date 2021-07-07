@@ -178,3 +178,5 @@ Users should be able to create a diet and configure it according to meals nutrit
 -----------------------------------------------
 - [] Performans iyileştirmeleri - Axios işlemlerini kontrol et
 - [] Performans iyileştirmeleri - Dynamic Import dene
+- [] Görsel - Loading ve Error Animasyonları (Lottie)
+- [] Görsel - React native vector icons kullan

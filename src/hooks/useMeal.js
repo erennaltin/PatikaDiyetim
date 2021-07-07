@@ -9,7 +9,7 @@ const useMeal = uri => {
     axios
       .get(uri)
       .then(res => {
-        setMeal(res.data.meals);
+        setMeal(res.data);
         setLoading(false);
       })
       .catch(err => {

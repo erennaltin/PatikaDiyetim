@@ -8,67 +8,69 @@ import {ActivityIndicator} from 'react-native-paper';
 import {colors} from '../../../../styles';
 import HorizontalMealSlider from '../../../../components/HorizontalMealSlider/HorizontalMealSlider';
 
-export default function DiscoverMealPage() {
+export default function DiscoverMealPage({navigation}) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('err');
-  const [todaysKitchen, setKitchen] = useState('Turkish');
-  // const [todaysKitchenMeals, setTodaysKitchen] = useState([]);
+  const [todaysKitchen, setKitchen] = useState('American');
 
   const {
     loading: randomLoading,
     meal: randomMeal,
     error: randomError,
-  } = useMeal('https://www.themealdb.com/api/json/v1/1/random.php');
-
-  const {
-    loading: kitchenLoading,
-    meal: kitchenList,
-    error: kitchenError,
-  } = useMeal('https://www.themealdb.com/api/json/v1/1/list.php?a=list');
+  } = useMeal(
+    'https://api.spoonacular.com/recipes/random?number=1&apiKey=4604414bb7954a628bbbbdc68944253b',
+  );
 
   const {
     loading: kitchenMealLoading,
     meal: kitchenMealList,
     error: kitchenMealError,
   } = useMeal(
-    `https://www.themealdb.com/api/json/v1/1/filter.php?a=${todaysKitchen}`,
+    `https://api.spoonacular.com/recipes/complexSearch?apiKey=4604414bb7954a628bbbbdc68944253b&cuisine=${todaysKitchen}&number=20`,
   );
 
   // Loading Check
   useEffect(() => {
     if (randomLoading) {
       setLoading(true);
-    } else if (kitchenLoading) {
-      setLoading(true);
     } else if (kitchenMealLoading) {
       setLoading(true);
     } else {
       setLoading(false);
     }
-  }, [randomLoading, kitchenLoading, kitchenMealLoading]);
+  }, [randomLoading, kitchenMealLoading]);
 
   // Error Check
   useEffect(() => {
     if (randomError) {
       setError(randomError);
-    } else if (kitchenError) {
-      setError(kitchenError);
     } else if (kitchenMealError) {
       setError(kitchenMealError);
     } else {
       setError(null);
     }
-  }, [randomError, kitchenError, kitchenMealError]);
+  }, [randomError, kitchenMealError]);
 
   // Kitchen's list handling
   useEffect(() => {
-    if (kitchenList !== '') {
-      const length = kitchenList.length;
-      let day = new Date().getDate();
-      day = day >= length ? 31 - day : day;
-      setKitchen(kitchenList[day].strArea);
-    }
-  }, [kitchenList]);
+    const cuisines = [
+      'American',
+      'British',
+      'Chinese',
+      'French',
+      'Greek',
+      'Indian',
+      'Irish',
+      'Italian',
+      'Japanese',
+      'Mexican',
+      'Spanish',
+      'Thai',
+      'Vietnamese',
+    ];
+    const random = Math.floor(Math.random() * cuisines.length);
+    setKitchen(cuisines[random]);
+  }, []);
 
   if (loading) {
     return (
@@ -81,10 +83,16 @@ export default function DiscoverMealPage() {
     <View style={styles.mainContainer}>
       <ScrollView style={styles.innerContainer}>
         <Text style={styles.randomMeal}> Take a new shot! </Text>
-        <MealContainer size="Large" meal={randomMeal[0]} />
-        <HorizontalMealSlider data={kitchenMealList}>
+        <MealContainer
+          mainNavigation={navigation}
+          size="Large"
+          meal={randomMeal.recipes[0]}
+        />
+        <HorizontalMealSlider
+          data={kitchenMealList}
+          mainNavigation={navigation}>
           <Text style={styles.todaysKitchen}>
-            {`Kitchen of Today: ${todaysKitchen}`}
+            {`Cuisine of Today: ${todaysKitchen}`}
           </Text>
           <CustomIcon style={styles.flagIcon} icon={todaysKitchen} size={24} />
         </HorizontalMealSlider>
