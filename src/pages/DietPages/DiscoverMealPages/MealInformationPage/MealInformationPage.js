@@ -1,5 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import styles from './MealInformationPage.style';
+import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
+import {colors, sizes} from '../../../../styles';
+
 import {
   ScrollView,
   Text,
@@ -7,9 +10,9 @@ import {
   TouchableOpacity,
   Linking,
   ActivityIndicator,
+  View,
 } from 'react-native';
 import useMeal from '../../../../hooks/useMeal';
-import {colors} from '../../../../styles';
 
 export default function MealModal({route}) {
   const [meal, setMeal] = useState({});
@@ -43,11 +46,24 @@ export default function MealModal({route}) {
   ) : (
     <ScrollView style={styles.container}>
       <Image style={styles.image} source={{uri: meal.image}} />
-      <Text style={styles.title}> {meal.title} </Text>
-      <Text style={styles.area}>{meal.nutrition.nutrients[0].amount} kcal</Text>
+      <View style={styles.informationContainer}>
+        <View>
+          <Text style={styles.title}> {meal.title} </Text>
+          <Text style={styles.cal}>
+            {meal.nutrition.nutrients[0].amount} kcal
+          </Text>
+        </View>
+        <TouchableOpacity style={styles.addToDiet}>
+          <MaterialIcon
+            name="add-circle-outline"
+            size={sizes.fontSize.Title}
+            color={colors.textColor.Primary}
+          />
+        </TouchableOpacity>
+      </View>
       <Text style={styles.instruction}> {meal.summary} </Text>
-      <TouchableOpacity style={styles.youtubeContainer} onPress={handleLink}>
-        <Text style={styles.youtube}> See the original!</Text>
+      <TouchableOpacity style={styles.linkContainer} onPress={handleLink}>
+        <Text style={styles.link}> See the original!</Text>
       </TouchableOpacity>
     </ScrollView>
   );

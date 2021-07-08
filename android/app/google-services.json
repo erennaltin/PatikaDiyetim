@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "530142634916",
+    "project_id": "patikadiyetim",
+    "storage_bucket": "patikadiyetim.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:530142634916:android:39ba8aad45223704d69731",
+        "android_client_info": {
+          "package_name": "com.patikadiyetim"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "530142634916-jdges5v3knp6487bdtrkhm9p75m3e65p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBtlIGgMlMwR07jmLvE9j5C251a-clXweU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "530142634916-jdges5v3knp6487bdtrkhm9p75m3e65p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -4,7 +4,6 @@ import MealContainer from '../MealContainer/MealContainer';
 import styles from './HorizontalMealSlider.style';
 
 export default function HorizontalMealSlider({children, data, mainNavigation}) {
-  console.log(data.results);
   return (
     <View style={styles.horizontalMenu}>
       <View style={styles.todaysKitchenContainer}>{children}</View>

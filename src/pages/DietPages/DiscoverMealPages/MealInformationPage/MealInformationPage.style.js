@@ -1,47 +1,58 @@
 import {StyleSheet} from 'react-native';
+import {colors, sizes} from '../../../../styles';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#eee',
   },
   image: {
     height: 300,
   },
   title: {
-    fontSize: 28,
-    color: 'firebrick',
+    fontSize: sizes.fontSize.Title,
+    color: colors.textColor.Secondary,
     fontWeight: 'bold',
-    marginLeft: 4,
+    marginLeft: sizes.margin.Small,
     textAlign: 'left',
   },
-  area: {
-    fontSize: 20,
-    color: 'firebrick',
+  cal: {
+    fontSize: sizes.fontSize.Standart,
+    color: colors.textColor.Secondary,
     fontWeight: 'bold',
-    paddingLeft: 4,
+    paddingLeft: sizes.padding.Medium,
     textAlign: 'left',
-    borderBottomColor: 'grey',
-    borderBottomWidth: 1,
   },
   instruction: {
-    paddingLeft: 8,
-    paddingBottom: 16,
+    paddingLeft: sizes.padding.Small,
+    paddingBottom: sizes.padding.Medium,
   },
-  youtube: {
+  link: {
     flex: 1,
-    backgroundColor: 'red',
-    padding: 12,
-    color: 'white',
-    borderRadius: 8,
-    fontSize: 16,
-    width: '80%',
+    backgroundColor: colors.backgroundColor.Primary,
+    padding: sizes.padding.Small,
+    color: colors.textColor.Primary,
+    borderRadius: sizes.borderRadius.Small,
+    fontSize: sizes.fontSize.Standart,
+    width: '60%',
     textAlign: 'center',
   },
-  youtubeContainer: {
+  linkContainer: {
     flex: 1,
     alignItems: 'center',
-    marginBottom: 16,
+    marginBottom: sizes.margin.Medium,
+  },
+  addToDiet: {
+    borderRadius: sizes.borderRadius.Full,
+    backgroundColor: colors.backgroundColor.Primary,
+    padding: sizes.padding.Small,
+    marginRight: sizes.margin.Small,
+  },
+  informationContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    borderBottomColor: colors.borderColor.Disabled,
+    borderBottomWidth: StyleSheet.hairlineWidth,
   },
 });
 

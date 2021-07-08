@@ -176,7 +176,9 @@ Users should be able to create a diet and configure it according to meals nutrit
 
 
 -----------------------------------------------
+- [] Teknik - Firebase - Auth0 entegrasyonu
 - [] Performans iyileştirmeleri - Axios işlemlerini kontrol et
 - [] Performans iyileştirmeleri - Dynamic Import dene
 - [] Görsel - Loading ve Error Animasyonları (Lottie)
-- [] Görsel - React native vector icons kullan
+- [x] Görsel - React native vector icons kullan
+- [] UI - Hızlı giriş için Logout yaparken access tokenı saklama seçeneği ekel
