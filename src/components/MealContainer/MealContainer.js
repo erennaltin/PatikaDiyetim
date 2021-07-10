@@ -15,8 +15,8 @@ export default function MealContainer({size, meal, mainNavigation}) {
     if (size === 'Large' && meal.id) {
       const words = meal.summary.split(' ');
       const index = words.indexOf('calories</b>,');
-      const calorie = words[index - 1].split('>')[1];
-      setCalories(calorie);
+      const calory = words[index - 1].split('>')[1];
+      setCalories(calory);
     }
   }, [meal, size]);
 

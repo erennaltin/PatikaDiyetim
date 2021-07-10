@@ -9,11 +9,10 @@ export default function AddDietModal({dietTitles, onRefresh}) {
   const [modalVisible, setModalVisible] = useState(false);
   const [dietName, setDietName] = useState('');
   const [error, setError] = useState(null);
-  const userSub = useSelector(state => state.store.user.sub);
+  const userSub = useSelector(state => state.store.user.user.sub);
 
   const addNewDietToCloud = async () => {
     try {
-      console.log(dietTitles.indexOf(dietName));
       if (dietTitles.indexOf(dietName) !== -1) {
         throw Error(`There is already a diet named '${dietName}'`);
       }
@@ -27,6 +26,9 @@ export default function AddDietModal({dietTitles, onRefresh}) {
       const setTheList = await dietList.set({
         isActive: false,
         kcal: 0,
+        picture:
+          'https://firebasestorage.googleapis.com/v0/b/patikadiyetim.appspot.com/o/dietImageDefault.jpg?alt=media&token=7b1c4219-7339-4c12-addd-ab9a057a33e1',
+        time: '-',
       });
       onRefresh();
       setModalVisible(!modalVisible);
@@ -54,9 +56,7 @@ export default function AddDietModal({dietTitles, onRefresh}) {
             <Pressable
               style={[styles.pressableView, styles.innerPressableView]}
               onPress={() => {}}>
-              <View
-                style={styles.modalContainer}
-                onPress={() => console.log('sa')}>
+              <View style={styles.modalContainer} onPress={() => {}}>
                 <Text style={styles.text}> Let's plan another one! </Text>
                 <TextInput
                   style={styles.textInput}
@@ -68,7 +68,9 @@ export default function AddDietModal({dietTitles, onRefresh}) {
                   <CustomButton
                     title="Add a new diet!"
                     theme="Third"
-                    disabled={dietName === '' ? true : false}
+                    disabled={
+                      dietName === '' || dietName.length > 30 ? true : false
+                    }
                     onPress={addNewDietToCloud}
                   />
                 </View>

@@ -6,8 +6,8 @@ import {useSelector} from 'react-redux';
 import DietContainer from '../../../../components/DietContainer';
 import AddDietModal from '../../../../components/AddDietModal/AddDietModal';
 
-export default function MyDietsPage() {
-  const userSub = useSelector(state => state.store.user.sub);
+export default function MyDietsPage({navigation}) {
+  const userSub = useSelector(state => state.store.user.user.sub);
   const [diets, setDiets] = useState([]);
   const [dietTitles, setTitles] = useState([]);
   const [refreshing, setRefreshing] = React.useState(false);
@@ -25,9 +25,7 @@ export default function MyDietsPage() {
         dietList.forEach(diet => {
           const obj = {
             title: diet.id,
-            calories: diet.data().kcal,
-            isActive: diet.data().isActive,
-            photoUrl: diet.data().photoUrl,
+            informations: diet.data(),
           };
           titleDiets.push(diet.id);
           initDiets.push(obj);
@@ -60,7 +58,7 @@ export default function MyDietsPage() {
           data={diets}
           keyExtractor={(item, index) => index}
           renderItem={({item, index}) => (
-            <DietContainer item={item} index={index} />
+            <DietContainer item={item} index={index} navigation={navigation} />
           )}
         />
         <AddDietModal dietTitles={dietTitles} onRefresh={onRefresh} />

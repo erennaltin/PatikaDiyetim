@@ -3,26 +3,36 @@ import {View, Text, Image, TouchableWithoutFeedback} from 'react-native';
 import styles from './DietContainer.style';
 import {sizes} from '../../styles';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
-import defaultPicture from '../../assets/defaults/dietImageDefault.jpg';
 
-export default function DietContainer({item, index}) {
+export default function DietContainer({item, index, navigation}) {
   const isEven = index % 2 === 0 ? 'Even' : 'Odd';
-  const picture = item.photoUrl || defaultPicture;
+  const goToDetail = () => {
+    navigation.navigate('DietInformationPage', {
+      title: item.title,
+    });
+  };
+
   return (
-    <TouchableWithoutFeedback>
+    <TouchableWithoutFeedback onPress={goToDetail}>
       <View style={[styles.mainContainer, styles[isEven]]}>
-        <Image source={picture} style={styles.picture} resizeMode="cover" />
+        <Image
+          source={{uri: item.informations.picture}}
+          style={styles.picture}
+          resizeMode="cover"
+        />
         <View style={styles.textContainer}>
           <Text style={[styles.title, styles.text]}> {item.title} </Text>
           <View style={[styles.informationContainer]}>
-            {item.isActive && (
+            {item.informations.isActive && (
               <MaterialIcon
                 name="check"
                 color="white"
                 size={sizes.fontSize.Standart}
               />
             )}
-            <Text style={[styles.calories, styles.text]}>{item.calories}</Text>
+            <Text style={[styles.calories, styles.text]}>
+              {item.informations.kcal}
+            </Text>
           </View>
         </View>
       </View>

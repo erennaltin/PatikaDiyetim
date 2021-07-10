@@ -182,8 +182,11 @@ Users should be able to create a diet and configure it according to meals nutrit
 - [] Performans iyileştirmeleri - Dynamic Import dene
 - [] Görsel - Loading ve Error Animasyonları (Lottie)
 - [x] Görsel - React native vector icons kullan
+- [] Görsel - Yemek detay sayfasını değiştir
 - [] Görsel - Loading ve Error Animasyonları
 - [] UI - Hızlı giriş için Logout yaparken access tokenı saklama seçeneği ekle
+- [] UI - Meal Information kısmı için metin, güncelle
+- [] UI - Diyet planı eklerken karakter sınırı koy
 ----------------------------------------------------------------
 1. Auth0 Entegrasyonu
 2. React Navigation, Nested Routes, Modal,
