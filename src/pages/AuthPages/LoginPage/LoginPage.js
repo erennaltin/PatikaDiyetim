@@ -11,6 +11,7 @@ const auth0 = new Auth0({
   domain: 'erennaltin.eu.auth0.com',
   clientId: 'v93vjNKnoACC4B8Wom8FK5uWE4oEbRLf',
 });
+import firestore from '@react-native-firebase/firestore';
 
 export default function LoginPage(props) {
   const [accessToken, setAccessToken] = useState('');
@@ -18,6 +19,7 @@ export default function LoginPage(props) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const dispatch = useDispatch();
+
   const checkAuth = () => {
     setLoading(true);
     auth0.webAuth
@@ -39,8 +41,20 @@ export default function LoginPage(props) {
           },
         })
         .then(res => {
-          dispatch(SET_USER(res.data));
+          console.log(res.data);
+          firestore()
+            .collection('users')
+            .doc(res.data.sub)
+            .set({
+              name: res.data.name,
+              country: res.data.locale,
+              picture: res.data.picture,
+            })
+            .then(() => {
+              console.log('User added!');
+            });
           setLoading(false);
+          dispatch(SET_USER(res.data));
         })
         .catch(err => {
           setError(err.message);

@@ -177,8 +177,16 @@ Users should be able to create a diet and configure it according to meals nutrit
 
 -----------------------------------------------
 - [] Teknik - Firebase - Auth0 entegrasyonu
+- [] Teknik - Firestore ayarlarını güncelle ve auth check et
 - [] Performans iyileştirmeleri - Axios işlemlerini kontrol et
 - [] Performans iyileştirmeleri - Dynamic Import dene
 - [] Görsel - Loading ve Error Animasyonları (Lottie)
 - [x] Görsel - React native vector icons kullan
-- [] UI - Hızlı giriş için Logout yaparken access tokenı saklama seçeneği ekel
+- [] Görsel - Loading ve Error Animasyonları
+- [] UI - Hızlı giriş için Logout yaparken access tokenı saklama seçeneği ekle
+----------------------------------------------------------------
+1. Auth0 Entegrasyonu
+2. React Navigation, Nested Routes, Modal,
+3. Firebase Cloud Firestore NoSQL tecrübesi,
+4. Detaylı Rapor,
+5. Test yazmak
