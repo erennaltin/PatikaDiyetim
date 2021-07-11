@@ -3,7 +3,12 @@ import {View, FlatList} from 'react-native';
 import MealContainer from '../MealContainer/MealContainer';
 import styles from './HorizontalMealSlider.style';
 
-export default function HorizontalMealSlider({children, data, mainNavigation}) {
+export default function HorizontalMealSlider({
+  children,
+  data,
+  mainNavigation,
+  unclickable,
+}) {
   return (
     <View style={styles.horizontalMenu}>
       <View style={styles.todaysKitchenContainer}>{children}</View>
@@ -17,6 +22,7 @@ export default function HorizontalMealSlider({children, data, mainNavigation}) {
             size="Small"
             meal={item}
             mainNavigation={mainNavigation}
+            unclickable={unclickable}
           />
         )}
       />

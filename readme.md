@@ -178,18 +178,24 @@ Users should be able to create a diet and configure it according to meals nutrit
 -----------------------------------------------
 - [] Teknik - Firebase - Auth0 entegrasyonu
 - [] Teknik - Firestore ayarlarını güncelle ve auth check et
+- [] Teknik - Restyle theme provider
 - [] Performans iyileştirmeleri - Axios işlemlerini kontrol et
 - [] Performans iyileştirmeleri - Dynamic Import dene
 - [] Görsel - Loading ve Error Animasyonları (Lottie)
 - [x] Görsel - React native vector icons kullan
 - [] Görsel - Yemek detay sayfasını değiştir
 - [] Görsel - Loading ve Error Animasyonları
+- [] Görsel - Diyet detayları sayfasının scrollunu değiştir
+- [] Görsel - Navigation style düzenle
+- [] Görsel - Meal Information sayfasını diet sayfası gibi yap
+- [] Görsel - React Navigation Shared Element
 - [] UI - Hızlı giriş için Logout yaparken access tokenı saklama seçeneği ekle
-- [] UI - Meal Information kısmı için metin, güncelle
 - [] UI - Diyet planı eklerken karakter sınırı koy
+- [] UI - Günün Menüsünü rastgele değil güne göre ayarla
 ----------------------------------------------------------------
 1. Auth0 Entegrasyonu
 2. React Navigation, Nested Routes, Modal,
 3. Firebase Cloud Firestore NoSQL tecrübesi,
 4. Detaylı Rapor,
 5. Test yazmak
+6. Restyle, Theme

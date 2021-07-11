@@ -13,9 +13,13 @@ import {
   View,
 } from 'react-native';
 import useMeal from '../../../../hooks/useMeal';
+import MealInformationHeader from '../../../../components/MealInformationHeader/MealInformationHeader';
+import InformationText from './../../../../components/InformationText/InformationText';
+import HorizontalMealSlider from '../../../../components/HorizontalMealSlider/HorizontalMealSlider';
 
-export default function MealModal({route}) {
+export default function MealInformationPage({route, navigation}) {
   const [meal, setMeal] = useState({});
+  const [ingredients, setIngredients] = useState({});
   const [error, setError] = useState(null);
   const mealId = route.params.mealId;
 
@@ -32,9 +36,31 @@ export default function MealModal({route}) {
   };
 
   useEffect(() => {
-    fetchedMeal === undefined
-      ? setError('Not Found!')
-      : (setError(null), setMeal(fetchedMeal));
+    if (
+      fetchedMeal === undefined ||
+      fetchedMeal === '' ||
+      fetchedMeal === null
+    ) {
+      setError('Not Found');
+    } else {
+      setError(null);
+      setMeal(fetchedMeal);
+      if (fetchedMeal) {
+        const initIngredients = [];
+        fetchedMeal.extendedIngredients.forEach(ingredint => {
+          const obj = {
+            id: ingredint.id,
+            title: ingredint.name,
+            image:
+              'https://spoonacular.com/cdn/ingredients_100x100/' +
+              ingredint.image,
+            summary: '',
+          };
+          initIngredients.push(obj);
+        });
+        setIngredients({results: initIngredients});
+      }
+    }
 
     fetchedError && setError(fetchedError);
   }, [fetchedMeal, fetchedError]);
@@ -44,27 +70,43 @@ export default function MealModal({route}) {
   ) : error ? (
     <Text> {error} </Text>
   ) : (
-    <ScrollView style={styles.container}>
-      <Image style={styles.image} source={{uri: meal.image}} />
-      <View style={styles.informationContainer}>
-        <View>
-          <Text style={styles.title}> {meal.title} </Text>
-          <Text style={styles.cal}>
-            {meal.nutrition.nutrients[0].amount} kcal
-          </Text>
-        </View>
-        <TouchableOpacity style={styles.addToDiet}>
-          <MaterialIcon
-            name="add-circle-outline"
-            size={sizes.fontSize.Title}
-            color={colors.textColor.Primary}
+    <>
+      <MealInformationHeader
+        navigation={navigation}
+        title={meal.nutrition.nutrients[0].amount}
+      />
+      <ScrollView style={styles.container}>
+        <Image style={styles.image} source={{uri: meal.image}} />
+
+        <View style={styles.innerContainer}>
+          <InformationText title="Name:" answer={meal.title} />
+          <InformationText
+            title="Calories:"
+            answer={meal.nutrition.nutrients[0].amount + ' kcal'}
           />
-        </TouchableOpacity>
-      </View>
-      <Text style={styles.instruction}> {meal.summary} </Text>
-      <TouchableOpacity style={styles.linkContainer} onPress={handleLink}>
-        <Text style={styles.link}> See the original!</Text>
-      </TouchableOpacity>
-    </ScrollView>
+          <InformationText title="Dishes:" answer={meal.dishTypes.join(',')} />
+          <InformationText
+            title="Dairy Free:"
+            answer={String(meal.dairyFree)}
+          />
+          <InformationText
+            title="Gluten Free:"
+            answer={String(meal.glutenFree)}
+          />
+          <InformationText title="For Vegans:" answer={String(meal.vegan)} />
+          <View style={styles.mealContainer}>
+            <HorizontalMealSlider
+              unclickable
+              data={ingredients}
+              mainNavigation={navigation}>
+              <Text style={styles.mealText}> Ingredients </Text>
+            </HorizontalMealSlider>
+          </View>
+          <TouchableOpacity style={styles.linkContainer} onPress={handleLink}>
+            <Text style={styles.link}> See the full recipe!</Text>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
+    </>
   );
 }

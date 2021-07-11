@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import styles from './MealInformationHeader.style';
+import styles from './DietInformationHeader.style';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import {View, Text, Pressable, Modal} from 'react-native';
 import DatePicker from 'react-native-date-picker';
@@ -7,7 +7,7 @@ import {colors} from '../../styles';
 import CustomButton from '../CustomButton/CustomButton';
 import firestore from '@react-native-firebase/firestore';
 
-export default function MealInformationHeader({
+export default function DietInformationHeader({
   title,
   navigation,
   userSub,
@@ -81,10 +81,10 @@ export default function MealInformationHeader({
         <Pressable onPress={goBack}>
           <MaterialIcon name="keyboard-backspace" size={24} color="black" />
         </Pressable>
-        <Text style={styles.title}> {title} kcal </Text>
+        <Text style={styles.title}> {title} </Text>
         <Pressable onPress={() => setModalVisible(!modalVisible)}>
           <MaterialIcon
-            name="add-chart"
+            name="add-alarm"
             size={24}
             color={colors.textColor.Secondary}
           />

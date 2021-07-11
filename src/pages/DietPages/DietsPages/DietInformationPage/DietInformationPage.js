@@ -5,7 +5,7 @@ import firestore from '@react-native-firebase/firestore';
 import {useSelector} from 'react-redux';
 import InformationText from '../../../../components/InformationText';
 import HorizontalMealSlider from './../../../../components/HorizontalMealSlider/HorizontalMealSlider';
-import MealInformationHeader from '../../../../components/MealInformationHeader/MealInformationHeader';
+import DietInformationHeader from '../../../../components/DietInformationHeader/DietInformationHeader';
 
 export default function DietInformationPage({route, navigation}) {
   const title = route.params.title;
@@ -56,7 +56,7 @@ export default function DietInformationPage({route, navigation}) {
 
   return (
     <View style={styles.outerContainer}>
-      <MealInformationHeader
+      <DietInformationHeader
         title={title}
         navigation={navigation}
         userSub={userSub}
@@ -76,7 +76,7 @@ export default function DietInformationPage({route, navigation}) {
             <InformationText title="Eating Time:" answer={diet.time} />
           </View>
           <View style={styles.mealContainer}>
-            <HorizontalMealSlider data={meals} mainNavigation>
+            <HorizontalMealSlider data={meals} mainNavigation={navigation}>
               <Text style={styles.mealText}> Meals </Text>
             </HorizontalMealSlider>
           </View>

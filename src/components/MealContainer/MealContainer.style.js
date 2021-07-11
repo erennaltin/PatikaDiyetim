@@ -22,7 +22,12 @@ const styles = StyleSheet.create({
   },
   image: {
     width: '100%',
+    height: '100%',
+  },
+  imageContainer: {
+    width: '100%',
     height: '85%',
+    backgroundColor: 'white',
   },
   mealInformationContainer: {
     height: '15%',

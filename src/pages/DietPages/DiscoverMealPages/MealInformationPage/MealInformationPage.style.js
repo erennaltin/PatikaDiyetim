@@ -4,27 +4,10 @@ import {colors, sizes} from '../../../../styles';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: colors.backgroundColor.Secondary,
   },
   image: {
-    height: 300,
-  },
-  title: {
-    fontSize: sizes.fontSize.Title,
-    color: colors.textColor.Secondary,
-    fontWeight: 'bold',
-    marginLeft: sizes.margin.Small,
-    textAlign: 'left',
-  },
-  cal: {
-    fontSize: sizes.fontSize.Standart,
-    color: colors.textColor.Secondary,
-    fontWeight: 'bold',
-    paddingLeft: sizes.padding.Medium,
-    textAlign: 'left',
-  },
-  instruction: {
-    paddingLeft: sizes.padding.Small,
-    paddingBottom: sizes.padding.Medium,
+    height: 240,
   },
   link: {
     flex: 1,
@@ -41,18 +24,21 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: sizes.margin.Medium,
   },
-  addToDiet: {
-    borderRadius: sizes.borderRadius.Full,
-    backgroundColor: colors.backgroundColor.Primary,
-    padding: sizes.padding.Small,
-    marginRight: sizes.margin.Small,
+  innerContainer: {
+    flex: 1,
+    backgroundColor: colors.backgroundColor.Secondary,
+    borderTopStartRadius: sizes.borderRadius.Large,
+    borderTopEndRadius: sizes.borderRadius.Large,
+    paddingTop: 20,
+    transform: [{translateY: -20}],
   },
-  informationContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    borderBottomColor: colors.borderColor.Disabled,
-    borderBottomWidth: StyleSheet.hairlineWidth,
+  mealContainer: {
+    marginLeft: sizes.margin.Small,
+    marginBottom: sizes.margin.Medium,
+  },
+  mealText: {
+    fontSize: sizes.fontSize.Title,
+    fontWeight: 'bold',
   },
 });
 

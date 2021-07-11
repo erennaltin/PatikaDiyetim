@@ -31,6 +31,7 @@ export default function DietPages() {
       <RootStack.Screen
         name="MealInformation"
         component={MealInformationPage}
+        options={{headerShown: false}}
       />
     </RootStack.Navigator>
   );
