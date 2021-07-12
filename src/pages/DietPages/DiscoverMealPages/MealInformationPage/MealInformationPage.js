@@ -1,7 +1,6 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 import styles from './MealInformationPage.style';
-import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
-import {colors, sizes} from '../../../../styles';
+import {colors} from '../../../../styles';
 
 import {
   ScrollView,
@@ -16,11 +15,13 @@ import useMeal from '../../../../hooks/useMeal';
 import MealInformationHeader from '../../../../components/MealInformationHeader/MealInformationHeader';
 import InformationText from './../../../../components/InformationText/InformationText';
 import HorizontalMealSlider from '../../../../components/HorizontalMealSlider/HorizontalMealSlider';
+import {useSelector} from 'react-redux';
 
 export default function MealInformationPage({route, navigation}) {
   const [meal, setMeal] = useState({});
   const [ingredients, setIngredients] = useState({});
   const [error, setError] = useState(null);
+  const userSub = useSelector(state => state.store.user.user.sub);
   const mealId = route.params.mealId;
 
   const {
@@ -65,6 +66,12 @@ export default function MealInformationPage({route, navigation}) {
     fetchedError && setError(fetchedError);
   }, [fetchedMeal, fetchedError]);
 
+  const scrollToEndRef = useCallback(node => {
+    if (node !== null) {
+      node.scrollToEnd({animated: true});
+    }
+  }, []);
+
   return loading ? (
     <ActivityIndicator size="small" color={colors.textColor.Secondary} />
   ) : error ? (
@@ -74,8 +81,12 @@ export default function MealInformationPage({route, navigation}) {
       <MealInformationHeader
         navigation={navigation}
         title={meal.nutrition.nutrients[0].amount}
+        userSub={userSub}
+        mealId={meal.id}
+        mealTitle={meal.title}
+        mealImage={meal.image}
       />
-      <ScrollView style={styles.container}>
+      <ScrollView style={styles.container} ref={scrollToEndRef}>
         <Image style={styles.image} source={{uri: meal.image}} />
 
         <View style={styles.innerContainer}>

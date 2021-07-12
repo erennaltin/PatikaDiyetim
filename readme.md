@@ -49,8 +49,8 @@ Users should be able to create a diet and configure it according to meals nutrit
       - Set eating times.
       - Set the alarm.
       - Update the alarm.
-      - Take their diet report.
-      - See their diet history.
+      - Take diet report.
+      - See diet history.
 
 ## Screens:
   1. Login Screen - Signup Screen (Stack Navigation)
@@ -183,7 +183,7 @@ Users should be able to create a diet and configure it according to meals nutrit
 - [] Performans iyileştirmeleri - Dynamic Import dene
 - [] Görsel - Loading ve Error Animasyonları (Lottie)
 - [x] Görsel - React native vector icons kullan
-- [] Görsel - Yemek detay sayfasını değiştir
+- [X] Görsel - Yemek detay sayfasını değiştir
 - [] Görsel - Loading ve Error Animasyonları
 - [] Görsel - Diyet detayları sayfasının scrollunu değiştir
 - [] Görsel - Navigation style düzenle

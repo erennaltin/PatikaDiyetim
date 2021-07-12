@@ -51,10 +51,6 @@ const styles = StyleSheet.create({
     fontSize: sizes.fontSize.Standart,
     fontWeight: 'bold',
   },
-  customButton: {
-    width: '90%',
-    marginTop: sizes.margin.Small,
-  },
 });
 
 export default styles;

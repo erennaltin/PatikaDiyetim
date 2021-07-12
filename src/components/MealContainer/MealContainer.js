@@ -35,7 +35,7 @@ export default function MealContainer({
             source={{
               uri: meal.image,
             }}
-            resizeMode="contain"
+            resizeMode={unclickable ? 'contain' : 'cover'}
           />
         </View>
         <View style={styles.mealInformationContainer}>

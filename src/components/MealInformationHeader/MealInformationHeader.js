@@ -1,45 +1,47 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import styles from './MealInformationHeader.style';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
-import {View, Text, Pressable, Modal} from 'react-native';
-import DatePicker from 'react-native-date-picker';
+import {View, Text, Pressable, Modal, FlatList} from 'react-native';
 import {colors} from '../../styles';
-import CustomButton from '../CustomButton/CustomButton';
 import firestore from '@react-native-firebase/firestore';
+import SelectDietToAdd from './../SelectDietToAdd/SelectDietToAdd';
 
 export default function MealInformationHeader({
   title,
   navigation,
   userSub,
-  onRefresh,
+  mealId,
+  mealImage,
+  mealTitle,
 }) {
-  const [date, setDate] = useState(new Date());
   const [modalVisible, setModalVisible] = useState(false);
+  const [dietList, setDietList] = useState(false);
 
   const goBack = () => {
     navigation.goBack();
   };
 
-  const addTimeToDiet = async () => {
-    const clock = `${date.getHours()}:${
-      date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()
-    }`;
-    try {
-      const diet = await firestore()
-        .collection('users')
-        .doc(userSub)
-        .collection('diets')
-        .doc(title);
+  useEffect(() => {
+    const takeDietList = async () => {
+      try {
+        const diets = await firestore()
+          .collection('users')
+          .doc(userSub)
+          .collection('diets')
+          .get();
 
-      await diet.update({
-        time: clock,
-      });
-    } catch (err) {
-      console.log(err);
-    }
-    onRefresh();
-    setModalVisible(!modalVisible);
-  };
+        const initDiets = [];
+        diets.forEach(diet => {
+          initDiets.push(diet.id);
+        });
+        setDietList(initDiets);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    takeDietList();
+  }, [userSub]);
 
   return (
     <>
@@ -58,20 +60,22 @@ export default function MealInformationHeader({
               style={[styles.pressableView, styles.innerPressableView]}
               onPress={() => {}}>
               <View style={styles.modalContainer} onPress={() => {}}>
-                <Text style={styles.text}> It is time to set time! </Text>
-                <DatePicker
-                  date={date}
-                  onDateChange={setDate}
-                  mode="time"
-                  is24hourSource="device"
+                <Text style={styles.text}>Choose the diet: </Text>
+                <FlatList
+                  data={dietList}
+                  keyExtractor={(_, index) => index}
+                  renderItem={({item}) => (
+                    <SelectDietToAdd
+                      title={item}
+                      mealCal={title}
+                      mealId={mealId}
+                      mealImage={mealImage}
+                      mealTitle={mealTitle}
+                      userSub={userSub}
+                      setModalVisible={setModalVisible}
+                    />
+                  )}
                 />
-                <View style={styles.customButton}>
-                  <CustomButton
-                    title="Add a new diet!"
-                    theme="Third"
-                    onPress={addTimeToDiet}
-                  />
-                </View>
               </View>
             </Pressable>
           </View>
