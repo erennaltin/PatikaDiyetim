@@ -199,3 +199,4 @@ Users should be able to create a diet and configure it according to meals nutrit
 4. Detaylı Rapor,
 5. Test yazmak
 6. Restyle, Theme
+7. API ile çalışmak

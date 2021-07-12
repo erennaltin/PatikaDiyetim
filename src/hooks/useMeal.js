@@ -1,7 +1,7 @@
 import {useState, useEffect} from 'react';
 import axios from 'axios';
 
-const useMeal = uri => {
+const useMeal = (uri, refreshing) => {
   const [loading, setLoading] = useState(true);
   const [meal, setMeal] = useState('');
   const [error, setError] = useState(null);
@@ -16,7 +16,7 @@ const useMeal = uri => {
         setError(err.message);
         setLoading(false);
       });
-  }, [uri]);
+  }, [uri, refreshing]);
 
   return {loading, meal, error};
 };

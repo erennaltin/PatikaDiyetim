@@ -5,12 +5,14 @@ import firestore from '@react-native-firebase/firestore';
 import {useSelector} from 'react-redux';
 import DietContainer from '../../../../components/DietContainer';
 import AddDietModal from '../../../../components/AddDietModal/AddDietModal';
+import {useIsFocused} from '@react-navigation/native';
 
 export default function MyDietsPage({navigation}) {
   const userSub = useSelector(state => state.store.user.user.sub);
   const [diets, setDiets] = useState([]);
   const [dietTitles, setTitles] = useState([]);
-  const [refreshing, setRefreshing] = React.useState(false);
+  const [refreshing, setRefreshing] = useState(false);
+  const isFocused = useIsFocused();
 
   useEffect(() => {
     const fetchDiets = async () => {
@@ -39,7 +41,7 @@ export default function MyDietsPage({navigation}) {
       }
     };
     fetchDiets();
-  }, [userSub, refreshing]);
+  }, [userSub, refreshing, isFocused]);
 
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);

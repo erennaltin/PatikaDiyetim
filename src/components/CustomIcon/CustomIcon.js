@@ -6,34 +6,24 @@ export default function CustomIcon(props) {
   const size = props.size || 16;
 
   const [components] = useState({
-    Turkish: flags.Turkish,
     Greek: flags.Greek,
     American: flags.American,
     British: flags.British,
-    Canadian: flags.Canadian,
     Chinese: flags.Chinese,
-    Dutch: flags.Dutch,
-    Egyptian: flags.Egyptian,
     French: flags.French,
     Indian: flags.Indian,
     Irish: flags.Irish,
     Italian: flags.Italian,
-    Jamaican: flags.Jamaican,
     Japanese: flags.Japanese,
-    Kenyan: flags.Kenyan,
-    Malaysian: flags.Malaysian,
     Mexican: flags.Mexican,
-    Moroccan: flags.Moroccan,
-    Polish: flags.Polish,
-    Portuguese: flags.Portuguese,
-    Russian: flags.Russian,
     Spanish: flags.Spanish,
     Thai: flags.Thai,
-    Tunisian: flags.Tunisian,
-    Unknown: flags.Unknown,
+    European: flags.European,
     Vietnamese: flags.Vietnamese,
+    German: flags.German,
+    DefaultFlag: flags.DefaultFlag,
   });
 
-  const TagName = components[Icon];
+  const TagName = components[Icon] || components.DefaultFlag;
   return <TagName width={size} height={size} style={props.style} />;
 }

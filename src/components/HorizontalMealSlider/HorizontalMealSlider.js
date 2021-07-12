@@ -16,7 +16,7 @@ export default function HorizontalMealSlider({
         horizontal
         showsHorizontalScrollIndicator={false}
         data={data.results}
-        keyExtractor={item => item.id}
+        keyExtractor={(_, index) => index}
         renderItem={({item}) => (
           <MealContainer
             size="Small"

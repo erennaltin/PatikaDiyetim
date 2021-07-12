@@ -6,6 +6,12 @@
  */
 
 const {getDefaultConfig} = require('metro-config');
+// const crypto = require('crypto');
+// const fs = require('fs');
+
+// let hash = crypto.createHash('sha256');
+// hash.update(fs.readFileSync('.env'));
+// const cacheVersion = hash.digest('hex');
 
 module.exports = (async () => {
   const {
@@ -19,5 +25,6 @@ module.exports = (async () => {
       assetExts: assetExts.filter(ext => ext !== 'svg'),
       sourceExts: [...sourceExts, 'svg'],
     },
+    // cacheVersion,
   };
 })();

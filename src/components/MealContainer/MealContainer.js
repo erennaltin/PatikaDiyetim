@@ -17,10 +17,14 @@ export default function MealContainer({
 
   useEffect(() => {
     if (size === 'Large' && meal.id) {
-      const words = meal.summary.split(' ');
+      const words = meal.summary
+        ? meal.summary.split(' ')
+        : '>000 calories</b>';
       const index = words.indexOf('calories</b>,');
-      const calory = words[index - 1].split('>')[1];
-      setCalories(calory);
+      if (index > 0) {
+        const calory = words[index - 1].split('>')[1];
+        setCalories(calory);
+      }
     }
   }, [meal, size]);
 

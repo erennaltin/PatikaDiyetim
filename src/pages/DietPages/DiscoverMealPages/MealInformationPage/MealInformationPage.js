@@ -16,6 +16,7 @@ import MealInformationHeader from '../../../../components/MealInformationHeader/
 import InformationText from './../../../../components/InformationText/InformationText';
 import HorizontalMealSlider from '../../../../components/HorizontalMealSlider/HorizontalMealSlider';
 import {useSelector} from 'react-redux';
+import {FOOD_API_KEY} from '@env';
 
 export default function MealInformationPage({route, navigation}) {
   const [meal, setMeal] = useState({});
@@ -29,7 +30,7 @@ export default function MealInformationPage({route, navigation}) {
     meal: fetchedMeal,
     error: fetchedError,
   } = useMeal(
-    `https://api.spoonacular.com/recipes/${mealId}/information?includeNutrition=true&apiKey=4604414bb7954a628bbbbdc68944253b`,
+    `https://api.spoonacular.com/recipes/${mealId}/information?includeNutrition=true&apiKey=${FOOD_API_KEY}`,
   );
 
   const handleLink = () => {
