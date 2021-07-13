@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 import styles from './DietInformationPage.style';
 import {View, Text, Image, ScrollView, RefreshControl} from 'react-native';
 import firestore from '@react-native-firebase/firestore';
@@ -38,7 +38,7 @@ export default function DietInformationPage({route, navigation}) {
         const obj = {
           id: meal.id,
           image: meal.data().image,
-          summary: `>${meal.data().kcal} calories</b>`,
+          kcal: meal.data().kcal,
           title: meal.data().title,
         };
         initMeals.push(obj);
@@ -50,7 +50,7 @@ export default function DietInformationPage({route, navigation}) {
     fetchMeals();
   }, [title, userSub, refreshing]);
 
-  const onRefresh = React.useCallback(() => {
+  const onRefresh = useCallback(() => {
     setRefreshing(true);
   }, []);
 
@@ -74,9 +74,17 @@ export default function DietInformationPage({route, navigation}) {
             <InformationText title="Using:" answer={String(diet.isActive)} />
             <InformationText title="Total Calories:" answer={diet.kcal} />
             <InformationText title="Eating Time:" answer={diet.time} />
+            <InformationText
+              title="To delete any meal from the diet press on for 1 second."
+              answer=""
+            />
           </View>
           <View style={styles.mealContainer}>
-            <HorizontalMealSlider data={meals} mainNavigation={navigation}>
+            <HorizontalMealSlider
+              data={meals}
+              mainNavigation={navigation}
+              title={title}
+              onRefresh={onRefresh}>
               <Text style={styles.mealText}> Meals </Text>
             </HorizontalMealSlider>
           </View>

@@ -179,6 +179,7 @@ Users should be able to create a diet and configure it according to meals nutrit
 - [] Teknik - Firebase - Auth0 entegrasyonu
 - [] Teknik - Firestore ayarlarını güncelle ve auth check et
 - [] Teknik - Restyle theme provider
+- [] Teknik - Large Meal Container Calory hesabı yanlış.
 - [] Performans iyileştirmeleri - Axios işlemlerini kontrol et
 - [] Performans iyileştirmeleri - Dynamic Import dene
 - [] Görsel - Loading ve Error Animasyonları (Lottie)

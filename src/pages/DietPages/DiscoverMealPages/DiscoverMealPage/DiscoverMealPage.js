@@ -4,6 +4,7 @@ import styles from './DiscoverMealPage.style';
 import MealContainer from './../../../../components/MealContainer/MealContainer';
 import CustomIcon from './../../../../components/CustomIcon';
 import useMeal from './../../../../hooks/useMeal';
+import useRandomMeal from './../../../../hooks/useRandomMeal';
 import {ActivityIndicator} from 'react-native-paper';
 import {colors} from '../../../../styles';
 import HorizontalMealSlider from '../../../../components/HorizontalMealSlider/HorizontalMealSlider';
@@ -20,11 +21,20 @@ export default function DiscoverMealPage({navigation}) {
     setRefreshing(true);
   }, []);
 
+  // const {
+  //   loading: randomLoading,
+  //   meal: randomMeal,
+  //   error: randomError,
+  // } = useMeal(
+  //   `https://api.spoonacular.com/recipes/random?number=1&apiKey=${FOOD_API_KEY}`,
+  //   refreshing,
+  // );
+
   const {
     loading: randomLoading,
     meal: randomMeal,
     error: randomError,
-  } = useMeal(
+  } = useRandomMeal(
     `https://api.spoonacular.com/recipes/random?number=1&apiKey=${FOOD_API_KEY}`,
     refreshing,
   );
@@ -54,7 +64,7 @@ export default function DiscoverMealPage({navigation}) {
             id: item.id,
             title: item.data().title,
             image: item.data().image,
-            summary: `>${item.data().kcal} </b>`,
+            kcal: item.data().kcal,
           };
           initList.push(obj);
         });
@@ -148,7 +158,8 @@ export default function DiscoverMealPage({navigation}) {
         <MealContainer
           mainNavigation={navigation}
           size="Large"
-          meal={randomMeal.recipes[0]}
+          meal={randomMeal}
+          dietName=""
         />
         <HorizontalMealSlider
           data={kitchenMealList}

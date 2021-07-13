@@ -8,7 +8,10 @@ export default function HorizontalMealSlider({
   data,
   mainNavigation,
   unclickable,
+  title,
+  onRefresh,
 }) {
+  const dietName = title || '';
   return (
     <View style={styles.horizontalMenu}>
       <View style={styles.todaysKitchenContainer}>{children}</View>
@@ -23,6 +26,8 @@ export default function HorizontalMealSlider({
             meal={item}
             mainNavigation={mainNavigation}
             unclickable={unclickable}
+            dietName={dietName}
+            onRefresh={onRefresh}
           />
         )}
       />

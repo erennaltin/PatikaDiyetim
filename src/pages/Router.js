@@ -12,7 +12,7 @@ export default function Router() {
   console.log(user2);
   return (
     <NavigationContainer>
-      <StatusBar hidden={true} />
+      <StatusBar barStyle="dark-content" />
       {user === null ? <AuthPages /> : <DietPages />}
     </NavigationContainer>
   );
