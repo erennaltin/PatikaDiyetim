@@ -21,9 +21,9 @@ export default function DietInformationHeader({
   };
 
   const addTimeToDiet = async () => {
-    const clock = `${date.getHours()}:${
-      date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()
-    }`;
+    const clock = `${
+      date.getHours() < 10 ? '0' + date.getHours() : date.getHours()
+    }:${date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()}`;
     try {
       const diet = await firestore()
         .collection('users')

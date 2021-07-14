@@ -196,8 +196,10 @@ Users should be able to create a diet and configure it according to meals nutrit
 ----------------------------------------------------------------
 1. Auth0 Entegrasyonu
 2. React Navigation, Nested Routes, Modal,
+2. Redux & Redux Persist
 3. Firebase Cloud Firestore NoSQL tecrübesi,
 4. Detaylı Rapor,
 5. Test yazmak
 6. Restyle, Theme
 7. API ile çalışmak
+8. Native tarafı yönetecek paketler Alarm notifications

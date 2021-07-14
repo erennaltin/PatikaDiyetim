@@ -9,6 +9,7 @@ import {
 import styles from './DietTimesPage.style';
 import firestore from '@react-native-firebase/firestore';
 import {useSelector} from 'react-redux';
+import DietTimeContainer from '../../../../components/DietTimeContainer/DietTimeContainer';
 
 export default function DietTimesPage() {
   const [loading, setLoading] = useState(false);
@@ -105,7 +106,9 @@ export default function DietTimesPage() {
         <SectionList
           sections={data}
           keyExtractor={(item, index) => index}
-          renderItem={({item}) => <Text> {item.title} </Text>}
+          renderItem={({item}) => (
+            <DietTimeContainer item={item} userSub={userSub} />
+          )}
           renderSectionHeader={({section: {title}}) => (
             <Text style={styles.header}>{title}</Text>
           )}

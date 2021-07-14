@@ -28,6 +28,7 @@
     "python-shell": "^3.0.0",
     "react": "17.0.1",
     "react-native": "0.64.2",
+    "react-native-alarm-notification": "^1.8.0",
     "react-native-auth0": "^2.9.0",
     "react-native-date-picker": "^3.3.2",
     "react-native-dotenv": "^3.0.0",

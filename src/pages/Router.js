@@ -8,8 +8,6 @@ import {useSelector} from 'react-redux';
 
 export default function Router() {
   const user = useSelector(state => state.store.user.user);
-  const user2 = useSelector(state => state.store.user);
-  console.log(user2);
   return (
     <NavigationContainer>
       <StatusBar barStyle="dark-content" />

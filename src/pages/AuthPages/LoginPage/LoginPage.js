@@ -41,7 +41,6 @@ export default function LoginPage(props) {
           },
         })
         .then(res => {
-          console.log(res.data);
           firestore()
             .collection('users')
             .doc(res.data.sub)
