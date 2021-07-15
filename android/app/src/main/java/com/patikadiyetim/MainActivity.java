@@ -1,3 +1,4 @@
+  
 package com.patikadiyetim;
 
 import com.facebook.react.ReactActivity;

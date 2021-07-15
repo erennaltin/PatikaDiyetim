@@ -1,28 +1,22 @@
 import React, {useState, useEffect} from 'react';
 import styles from './DietTimeContainer.style';
-import {
-  View,
-  Text,
-  Switch,
-  NativeEventEmitter,
-  NativeModules,
-} from 'react-native';
+import {View, Text, Switch} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {sizes, colors} from '../../styles';
 import firestore from '@react-native-firebase/firestore';
-import ReactNativeAN from 'react-native-alarm-notification';
-
-const {RNAlarmNotification} = NativeModules;
-const RNAlarmEmitter = new NativeEventEmitter(RNAlarmNotification);
+import notifee, {
+  TriggerType,
+  RepeatFrequency,
+  AndroidImportance,
+  AndroidVisibility,
+} from '@notifee/react-native';
+import {useSelector} from 'react-redux';
 
 export default function DietTimeContainer({item, userSub}) {
   const [isEnabled, setIsEnabled] = useState(item.data.isActive);
-  // const [alarm, setAlarm] = useState({});
-  const date = new Date();
-  const hour = item.data.time.split(':')[0];
-  const minute = item.data.time.split(':')[1];
-  date.setHours(hour);
-  date.setMinutes(minute);
+  const notificationList = useSelector(
+    state => state.store.notification.notifications,
+  );
 
   const toggleSwitch = async () => {
     await firestore()
@@ -38,72 +32,109 @@ export default function DietTimeContainer({item, userSub}) {
   };
 
   useEffect(() => {
-    const alarmNotifData = {
-      title: item.title,
-      message: `It is time to your ${item.title} diet!`,
-      channel: 'PatikDiyetim',
-      small_icon: 'ic_launcher',
-      schedule_type: 'repeat',
-      repeat_interval: 'daily',
-      interval_value: 1,
-      auto_cancel: true,
-      has_button: true,
+    const notificationPiece = notificationList.find(notification =>
+      item.title === notification.title ? true : false,
+    ) || {time: item.data.time};
+
+    const getTimestamp = () => {
+      const timestampDate = new Date();
+      const hour =
+        notificationPiece.time.split(':')[0] || item.data.time.split(':')[0];
+      const minute =
+        notificationPiece.time.split(':')[1] || item.data.time.split(':')[1];
+      timestampDate.setHours(hour);
+      timestampDate.setMinutes(minute);
+      const currentTime = new Date(Date.now());
+      if (currentTime.getTime() > timestampDate.getTime()) {
+        timestampDate.setDate(timestampDate.getDate() + 1);
+      }
+      return timestampDate.getTime() + 1000;
     };
 
-    const setAlarm = async () => {
-      const fireDate = ReactNativeAN.parseDate(new Date(Date.now() + 1000)); // set the fire date for 1 second from now
-      await ReactNativeAN.scheduleAlarm({
-        ...alarmNotifData,
-        fire_date: fireDate,
-      });
-      console.log('setted');
+    const onTriggerNotificationPress = async () => {
+      const channel = await notifee.getChannel('Diyetim');
+      if (channel === null) {
+        console.log('NEW');
+        await notifee.createChannel({
+          id: 'Diyetim',
+          name: 'Diyetim',
+          importance: AndroidImportance.HIGH,
+          visibility: AndroidVisibility.PUBLIC,
+          vibration: true,
+          sound: 'default',
+        });
+      }
+      /* Change the trigger */
+      const trigger = {
+        timestamp: getTimestamp(),
+        type: TriggerType.TIMESTAMP,
+        alarmManager: {
+          allowWhileIdle: true,
+        },
+        repeatFrequency: RepeatFrequency.DAILY,
+      };
+
+      const notification = {
+        id: item.title,
+        title: 'Eating Time!',
+        body: `it is time to eat your ${item.title} diet!`,
+        android: {
+          channelId: 'Diyetim',
+          pressAction: {
+            id: 'Diyetim',
+          },
+        },
+        ios: {
+          sound: 'default',
+        },
+      };
+      await notifee.createTriggerNotification(notification, trigger);
     };
 
-    const deleteRepeatingAlarms = async id => {
-      ReactNativeAN.deleteAlarm(id);
-      ReactNativeAN.deleteRepeatingAlarm(id);
-      console.log('deleted');
-    };
-
-    const handleAlarms = async () => {
-      const alarms = await ReactNativeAN.getScheduledAlarms();
-      let alarm = alarms.filter(alarmP => {
-        return alarmP.title === item.title ? true : false;
-      })[0];
-      if (alarm === undefined && isEnabled) {
-        setAlarm();
-      } else if (alarm !== undefined && !isEnabled) {
-        deleteRepeatingAlarms(alarm.id);
+    const seeTriggeredNotifications = async () => {
+      try {
+        const idList = await notifee.getTriggerNotificationIds();
+        return idList.indexOf(item.title) !== -1 ? true : false;
+      } catch (err) {
+        console.log(err);
       }
     };
 
-    handleAlarms();
-  }, [isEnabled, item]);
-
-  useEffect(() => {
-    const dismissSubscription = RNAlarmEmitter.addListener(
-      'OnNotificationDismissed',
-      data => {
-        console.log('dismissed');
-        ReactNativeAN.stopAlarmSound(data.id);
-        ReactNativeAN.removeFiredNotification(data.id);
-      },
-    );
-
-    const openedSubscription = RNAlarmEmitter.addListener(
-      'OnNotificationOpened',
-      data => {
-        console.log('opened');
-        ReactNativeAN.stopAlarmSound(data.id);
-        ReactNativeAN.removeFiredNotification(data.id);
-      },
-    );
-
-    return () => {
-      dismissSubscription.remove();
-      openedSubscription.remove();
+    const cancelTriggeredNotifications = async () => {
+      try {
+        await notifee.cancelNotification(item.title);
+        console.log('cancelled');
+      } catch (err) {
+        console.log(err);
+      }
     };
-  }, []);
+
+    const handleAlarm = async () => {
+      try {
+        const isSetted = await seeTriggeredNotifications();
+        if (isEnabled && !isSetted) {
+          console.log('1--->');
+          onTriggerNotificationPress();
+        } else if (
+          isEnabled &&
+          isSetted &&
+          item.data.time !== notificationPiece.time
+        ) {
+          console.log('2--->');
+          console.log(item.data.time, notificationPiece.time);
+          cancelTriggeredNotifications();
+          onTriggerNotificationPress();
+        } else if (!isEnabled && isSetted) {
+          console.log('3--->');
+          cancelTriggeredNotifications();
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    handleAlarm();
+  }, [isEnabled, item, notificationList]);
 
   return (
     <View style={styles.mainContainer}>

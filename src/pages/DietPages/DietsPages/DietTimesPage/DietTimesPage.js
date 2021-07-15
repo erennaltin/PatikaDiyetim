@@ -16,6 +16,9 @@ export default function DietTimesPage() {
   const [data, setData] = useState(false);
   const [refreshing, setRefreshing] = React.useState(false);
   const userSub = useSelector(state => state.store.user.user.sub);
+  const notificationList = useSelector(
+    state => state.store.notification.notifications,
+  );
   const onRefresh = useCallback(() => {
     setRefreshing(true);
   }, []);
@@ -96,7 +99,7 @@ export default function DietTimesPage() {
     };
 
     fetchDietList();
-  }, [userSub, refreshing]);
+  }, [userSub, refreshing, notificationList]);
 
   return (
     <View style={styles.mainContainer}>

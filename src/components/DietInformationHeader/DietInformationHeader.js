@@ -6,6 +6,11 @@ import DatePicker from 'react-native-date-picker';
 import {colors} from '../../styles';
 import CustomButton from '../CustomButton/CustomButton';
 import firestore from '@react-native-firebase/firestore';
+import {useSelector, useDispatch} from 'react-redux';
+import {
+  ADD_NOTIFICATION,
+  UPDATE_NOTIFICATION,
+} from '../../store/reducers/NotificationReducer';
 
 export default function DietInformationHeader({
   title,
@@ -15,7 +20,10 @@ export default function DietInformationHeader({
 }) {
   const [date, setDate] = useState(new Date());
   const [modalVisible, setModalVisible] = useState(false);
-
+  const notificationList = useSelector(
+    state => state.store.notification.notifications,
+  );
+  const dispatch = useDispatch();
   const goBack = () => {
     navigation.goBack();
   };
@@ -34,9 +42,30 @@ export default function DietInformationHeader({
       await diet.update({
         time: clock,
       });
+
+      const index = notificationList.indexOf(
+        notificationList.filter(
+          notification => notification.title === title,
+        )[0],
+      );
+
+      const obj = {
+        data: {
+          title: title,
+          time: clock,
+        },
+        index: index,
+      };
+
+      if (index === -1) {
+        dispatch(ADD_NOTIFICATION(obj));
+      } else {
+        dispatch(UPDATE_NOTIFICATION(obj));
+      }
     } catch (err) {
       console.log(err);
     }
+
     onRefresh();
     setModalVisible(!modalVisible);
   };
@@ -67,7 +96,7 @@ export default function DietInformationHeader({
                 />
                 <View style={styles.customButton}>
                   <CustomButton
-                    title="Add a new diet!"
+                    title="Set the eating notification!"
                     theme="Third"
                     onPress={addTimeToDiet}
                   />

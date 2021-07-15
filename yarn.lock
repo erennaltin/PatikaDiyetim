@@ -955,6 +955,11 @@
     "@types/yargs" "^15.0.0"
     chalk "^4.0.0"
 
+"@notifee/react-native@^1.9.2":
+  version "1.9.2"
+  resolved "https://registry.yarnpkg.com/@notifee/react-native/-/react-native-1.9.2.tgz#a31c8c159773a46b40b0845f7adb7bdb437bf50d"
+  integrity sha512-3GXujq1mYxC3J7udyvjs2r11drVSgz/2sSHIbx0JQ1UMt18OXNQ0o5ErBuRSk7TgeS0FCC96RBmBa0MZPvCoAw==
+
 "@react-native-async-storage/async-storage@^1.15.5":
   version "1.15.5"
   resolved "https://registry.yarnpkg.com/@react-native-async-storage/async-storage/-/async-storage-1.15.5.tgz#0d221a5ef1cd7a6494a42fcaad43136d68379afb"
@@ -1132,6 +1137,11 @@
   version "12.1.0"
   resolved "https://registry.yarnpkg.com/@react-native-firebase/firestore/-/firestore-12.1.0.tgz#079d1c01ec72b2f3602eacdaace4da5b285a6c26"
   integrity sha512-SyiqRAQRS0C0Gh5gOZBp9UM0FFOF555uqJK+3NzO2GHGYM7ofLONyhnhZEJGWk9iDog/TnRjlAHC3C1zsDe+1w==
+
+"@react-native-firebase/messaging@^12.1.0":
+  version "12.1.0"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/messaging/-/messaging-12.1.0.tgz#eb74e37edabd0c392e28f6df622adafeb1617e23"
+  integrity sha512-8kL2Gs5N6o4aJdeoNrrYnmFvMms+H+mjj3ttlQLWobN7hy7fLCD9sbahJR9W3jzSoOb+XTaxk6Xf3PzVBBB7Mw==
 
 "@react-native/assets@1.0.0":
   version "1.0.0"
