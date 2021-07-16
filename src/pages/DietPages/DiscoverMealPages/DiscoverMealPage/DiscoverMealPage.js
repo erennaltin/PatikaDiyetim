@@ -5,11 +5,10 @@ import MealContainer from './../../../../components/MealContainer/MealContainer'
 import CustomIcon from './../../../../components/CustomIcon';
 import useMeal from './../../../../hooks/useMeal';
 import useRandomMeal from './../../../../hooks/useRandomMeal';
-import {ActivityIndicator} from 'react-native-paper';
-import {colors} from '../../../../styles';
 import HorizontalMealSlider from '../../../../components/HorizontalMealSlider/HorizontalMealSlider';
 import firestore from '@react-native-firebase/firestore';
 import {FOOD_API_KEY} from '@env';
+import LottieView from 'lottie-react-native';
 
 export default function DiscoverMealPage({navigation}) {
   const [loading, setLoading] = useState(true);
@@ -131,7 +130,11 @@ export default function DiscoverMealPage({navigation}) {
 
   if (loading) {
     return (
-      <ActivityIndicator size="medium" color={colors.textColor.Secondary} />
+      <LottieView
+        source={require('../../../../assets/lottie/loading.json')}
+        autoPlay
+        loop
+      />
     );
   } else if (error) {
     return <Text> {error} </Text>;

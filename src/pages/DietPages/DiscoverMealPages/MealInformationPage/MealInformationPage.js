@@ -1,6 +1,5 @@
 import React, {useState, useEffect, useCallback} from 'react';
 import styles from './MealInformationPage.style';
-import {colors} from '../../../../styles';
 
 import {
   ScrollView,
@@ -8,7 +7,6 @@ import {
   Image,
   TouchableOpacity,
   Linking,
-  ActivityIndicator,
   View,
 } from 'react-native';
 import useMeal from '../../../../hooks/useMeal';
@@ -17,6 +15,7 @@ import InformationText from './../../../../components/InformationText/Informatio
 import HorizontalMealSlider from '../../../../components/HorizontalMealSlider/HorizontalMealSlider';
 import {useSelector} from 'react-redux';
 import {FOOD_API_KEY} from '@env';
+import LottieView from 'lottie-react-native';
 
 export default function MealInformationPage({route, navigation}) {
   const [meal, setMeal] = useState({});
@@ -74,7 +73,11 @@ export default function MealInformationPage({route, navigation}) {
   }, []);
 
   return loading ? (
-    <ActivityIndicator size="small" color={colors.textColor.Secondary} />
+    <LottieView
+      source={require('../../../../assets/lottie/loading.json')}
+      autoPlay
+      loop
+    />
   ) : error ? (
     <Text> {error} </Text>
   ) : (

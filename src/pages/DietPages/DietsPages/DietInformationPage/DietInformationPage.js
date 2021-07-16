@@ -6,15 +6,18 @@ import {useSelector} from 'react-redux';
 import InformationText from '../../../../components/InformationText';
 import HorizontalMealSlider from './../../../../components/HorizontalMealSlider/HorizontalMealSlider';
 import DietInformationHeader from '../../../../components/DietInformationHeader/DietInformationHeader';
+import LottieView from 'lottie-react-native';
 
 export default function DietInformationPage({route, navigation}) {
   const title = route.params.title;
+  const [loading, setLoading] = useState(false);
   const [diet, setDiet] = useState({kcal: 0});
   const [meals, setMeals] = useState({});
   const [refreshing, setRefreshing] = React.useState(false);
   const userSub = useSelector(state => state.store.user.user.sub);
 
   useEffect(() => {
+    setLoading(true);
     const fetchInformations = async () => {
       const informations = await firestore()
         .collection('users')
@@ -24,6 +27,7 @@ export default function DietInformationPage({route, navigation}) {
         .get();
       setDiet(informations.data());
       setRefreshing(false);
+      setLoading(false);
     };
     const fetchMeals = async () => {
       const mealList = await firestore()
@@ -54,45 +58,55 @@ export default function DietInformationPage({route, navigation}) {
     setRefreshing(true);
   }, []);
 
-  return (
-    <View style={styles.outerContainer}>
-      <DietInformationHeader
-        title={title}
-        navigation={navigation}
-        userSub={userSub}
-        onRefresh={onRefresh}
+  if (loading) {
+    return (
+      <LottieView
+        source={require('../../../../assets/lottie/loading.json')}
+        autoPlay
+        loop
       />
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        }>
-        <Image source={{uri: diet.picture}} style={styles.picture} />
-        <View style={styles.innerContainer}>
-          <View style={styles.informations}>
-            <InformationText title="Name:" answer={title} />
-            <InformationText title="Using:" answer={String(diet.isActive)} />
-            <InformationText
-              title="Total Calories:"
-              answer={diet.kcal.toFixed(2)}
-            />
-            <InformationText title="Eating Time:" answer={diet.time} />
-            <InformationText
-              title="To delete any meal from the diet press on for 1 second."
-              answer=""
-            />
+    );
+  } else {
+    return (
+      <View style={styles.outerContainer}>
+        <DietInformationHeader
+          title={title}
+          navigation={navigation}
+          userSub={userSub}
+          onRefresh={onRefresh}
+        />
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          }>
+          <Image source={{uri: diet.picture}} style={styles.picture} />
+          <View style={styles.innerContainer}>
+            <View style={styles.informations}>
+              <InformationText title="Name:" answer={title} />
+              <InformationText title="Using:" answer={String(diet.isActive)} />
+              <InformationText
+                title="Total Calories:"
+                answer={diet.kcal.toFixed(2)}
+              />
+              <InformationText title="Eating Time:" answer={diet.time} />
+              <InformationText
+                title="To delete any meal from the diet press on for 1 second."
+                answer=""
+              />
+            </View>
+            <View style={styles.mealContainer}>
+              <HorizontalMealSlider
+                data={meals}
+                mainNavigation={navigation}
+                title={title}
+                onRefresh={onRefresh}>
+                <Text style={styles.mealText}> Meals </Text>
+              </HorizontalMealSlider>
+            </View>
           </View>
-          <View style={styles.mealContainer}>
-            <HorizontalMealSlider
-              data={meals}
-              mainNavigation={navigation}
-              title={title}
-              onRefresh={onRefresh}>
-              <Text style={styles.mealText}> Meals </Text>
-            </HorizontalMealSlider>
-          </View>
-        </View>
-      </ScrollView>
-    </View>
-  );
+        </ScrollView>
+      </View>
+    );
+  }
 }

@@ -58,140 +58,19 @@ Users should be able to create a diet and configure it according to meals nutrit
   2. Discover Meals (Stack Container)
   3. Profile Screen
 
-
-## Step by Step Presentation:
-  ### 1. Sign up into the system.
-  
-  #### Positive Case
-  1. User comes to the sign up screen.
-  2. User fills in the mail input.
-  3. Mail is checked.
-  4. User fills in the password input.
-  5. Password is checked.
-  6. User fills in the re-password input.
-  7. Password again is checked.
-  8. User presses the sign up button.
-  9. Credentials is sent to the system.
-  10. System returns OK.
-  11. User is directed to the login screen.
-
-  #### Negative Case #1
-   2. User fills in the mail input.
-   3. Mail is checked.
-   4. Mail is not valid.
-   5. Show an error message below the mail input.
-
-  #### Negative Case #2
-  4. User fills in the password input.
-  5. Password is checked.
-  6. Password is not valid.
-  7. Show an error message below the password input.
-
-  #### Negative Case #3
-  6. User fills in the re-password input.
-  7. Password again is checked.
-  8. Password and password again are not matched.
-  9. Show an error message below the re-password input.
-
-  #### Negative Case #4
-  10. System returns ERROR.
-  11. Show an error message below the sign up button.
-
-
-  ### 2. Login into the system.
-  
-  #### Positive Case
-  1. User comes to the sign up screen.
-  2. User fills in the mail input.
-  3. Mail is checked.
-  4. User fills in the password input.
-  5. Password is checked.
-  6. User presses the login button.
-  7. Credentials is sent to the system.
-  8. System returns OK.
-  9. User is directed to the home page.
-
- #### Negative Case #1
-   2. User fills in the mail input.
-   3. Mail is checked.
-   4. Mail is not valid.
-   5. Show an error message below the mail input.
-
-#### Negative Case #2
-  4. User fills in the password input.
-  5. Password is checked.
-  6. Password is not valid.
-  7. Show an error message below the password input.
-
- #### Negative Case #3
-  8. System returns ERROR.
-  9. Show an error message below the sign up button.
-
-
-  ### 3. See Meals && See meals nutritional values && See the most selected meals.
-
-  #### Positive Case
-  1. Set the loading state.
-  2. Set the mealData state.
-  3. Fetch meal history information about user from the system.
-  4. System returns OK.
-  5. Fetch meal informations from the server.
-  6. Server returns OK.
-  7. Set informations as mealData state.
-  8. set loading state false.
-
-  #### Negative Case #1
-  3. Fetch meal history information about user from the system.
-  4. System returns ERROR.
-  5. Show an error and wait for the refresh command.
-
-  #### Negative Case #2
-  5. Fetch meal informations from the server.
-  6. Server returns ERROR.
-  5. Show an error and wait for the refresh command.
-
-
-  ### 4. Create the diet menu && see the diet menu.
-
-  #### Positive Case 
-  1. User presses the add diet menu button.
-
-
-
-  ### 4. Select meals onto the diet menu.
-
-  #### Positive Case 
-  1. User presses the add button on the meal container.
-  2. User chooses the diet menu.
-     or
-  2. User create a new diet menu.
-  3. The meal code added to the diet menu.
-
-
-
-
-
-
-
-
 -----------------------------------------------
-- [] Teknik - Firebase - Auth0 entegrasyonu
-- [] Teknik - Firestore ayarlarını güncelle ve auth check et
-- [] Teknik - Restyle theme provider
-- [] Teknik - Large Meal Container Calory hesabı yanlış.
-- [] Performans iyileştirmeleri - Axios işlemlerini kontrol et
-- [] Performans iyileştirmeleri - Dynamic Import dene
+- [x] Teknik - Firestore ayarlarını güncelle ve auth check et
+- [x] Teknik - Large Meal Container Calory hesabı yanlış.
+- [x] Performans iyileştirmeleri - Axios işlemlerini kontrol et
+- [-] Performans iyileştirmeleri - Dynamic Import dene
 - [] Görsel - Loading ve Error Animasyonları (Lottie)
 - [x] Görsel - React native vector icons kullan
-- [X] Görsel - Yemek detay sayfasını değiştir
-- [] Görsel - Loading ve Error Animasyonları
-- [] Görsel - Diyet detayları sayfasının scrollunu değiştir
-- [] Görsel - Navigation style düzenle
-- [] Görsel - Meal Information sayfasını diet sayfası gibi yap
-- [] Görsel - React Navigation Shared Element
-- [] UI - Hızlı giriş için Logout yaparken access tokenı saklama seçeneği ekle
-- [] UI - Diyet planı eklerken karakter sınırı koy
-- [] UI - Günün Menüsünü rastgele değil güne göre ayarla
+- [x] Görsel - Yemek detay sayfasını değiştir
+- [x] Görsel - Loading ve Error Animasyonları
+- [x] Görsel - Navigation style düzenle
+- [x] Görsel - Meal Information sayfasını diet sayfası gibi yap
+- [x] UI - Diyet planı eklerken karakter sınırı koy
+- [x] UI - Günün Menüsünü rastgele değil güne göre ayarla
 ----------------------------------------------------------------
 1. Auth0 Entegrasyonu
 2. React Navigation, Nested Routes, Modal,

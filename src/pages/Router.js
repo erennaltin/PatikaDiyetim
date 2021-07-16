@@ -10,7 +10,6 @@ export default function Router() {
   const user = useSelector(state => state.store.user.user);
   return (
     <NavigationContainer>
-      {/* <StatusBar barStyle="dark-content" /> */}
       {user === null ? <AuthPages /> : <DietPages />}
     </NavigationContainer>
   );
