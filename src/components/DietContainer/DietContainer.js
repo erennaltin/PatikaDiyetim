@@ -25,7 +25,7 @@ export default function DietContainer({item, index, navigation}) {
           <View style={[styles.informationContainer]}>
             {item.informations.isActive && (
               <MaterialIcon
-                name="check"
+                name="set-meal"
                 color="white"
                 size={sizes.fontSize.Standart}
               />

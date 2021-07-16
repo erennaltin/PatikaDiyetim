@@ -31,7 +31,6 @@ Users should be able to create a diet and configure it according to meals nutrit
 
 ## Extra Requirements:
   1. The app should remind eating times to users by notifications.
-  2. The app should remind eating times by setting alarms.
 
 ## Actors and Actions:
   1. User

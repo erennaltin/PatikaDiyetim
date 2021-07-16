@@ -21,15 +21,6 @@ export default function DiscoverMealPage({navigation}) {
     setRefreshing(true);
   }, []);
 
-  // const {
-  //   loading: randomLoading,
-  //   meal: randomMeal,
-  //   error: randomError,
-  // } = useMeal(
-  //   `https://api.spoonacular.com/recipes/random?number=1&apiKey=${FOOD_API_KEY}`,
-  //   refreshing,
-  // );
-
   const {
     loading: randomLoading,
     meal: randomMeal,

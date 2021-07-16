@@ -9,7 +9,7 @@ import DietInformationHeader from '../../../../components/DietInformationHeader/
 
 export default function DietInformationPage({route, navigation}) {
   const title = route.params.title;
-  const [diet, setDiet] = useState({});
+  const [diet, setDiet] = useState({kcal: 0});
   const [meals, setMeals] = useState({});
   const [refreshing, setRefreshing] = React.useState(false);
   const userSub = useSelector(state => state.store.user.user.sub);
@@ -72,7 +72,10 @@ export default function DietInformationPage({route, navigation}) {
           <View style={styles.informations}>
             <InformationText title="Name:" answer={title} />
             <InformationText title="Using:" answer={String(diet.isActive)} />
-            <InformationText title="Total Calories:" answer={diet.kcal} />
+            <InformationText
+              title="Total Calories:"
+              answer={diet.kcal.toFixed(2)}
+            />
             <InformationText title="Eating Time:" answer={diet.time} />
             <InformationText
               title="To delete any meal from the diet press on for 1 second."

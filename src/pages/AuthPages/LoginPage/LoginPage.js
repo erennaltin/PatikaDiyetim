@@ -61,8 +61,6 @@ export default function LoginPage(props) {
         });
   }, [accessToken, dispatch, isLogin]);
 
-  const logout = () => {};
-
   return (
     <View style={styles.container}>
       <View style={styles.titleContainer}>
@@ -75,7 +73,6 @@ export default function LoginPage(props) {
           theme="Secondary"
           loading={loading}
         />
-        <CustomButton onPress={logout} title="Logout!" theme="Secondary" />
         {error && <Text> {error} </Text>}
       </View>
     </View>
