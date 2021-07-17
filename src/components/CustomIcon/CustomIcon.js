@@ -1,10 +1,7 @@
 import React, {useState} from 'react';
 import * as flags from '../../assets/icons/flags';
 
-export default function CustomIcon(props) {
-  const Icon = props.icon || 'Turkish';
-  const size = props.size || 16;
-
+const CustomIcon = ({Icon, size = 16, style = {}}) => {
   const [components] = useState({
     Greek: flags.Greek,
     American: flags.American,
@@ -25,5 +22,7 @@ export default function CustomIcon(props) {
   });
 
   const TagName = components[Icon] || components.DefaultFlag;
-  return <TagName width={size} height={size} style={props.style} />;
-}
+  return <TagName width={size} height={size} style={style} />;
+};
+
+export default CustomIcon;

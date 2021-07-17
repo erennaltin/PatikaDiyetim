@@ -1,3 +1,25 @@
+# **Before Starting**
+
+In this project, I gained experience about:
+  - Using external packages for Authentication (Auth0) instead of regular database authentication.
+  - Using React Navigation within a nested structure and with modals.
+  - Using Redux and Redux Persist for state management. Mostly because of the need for store auth token and make my application works faster.
+  - Using Firebase/Firestore which is working on NoSQL instead of regular MySQL or SQLite database.
+    - Using collection group queries which provide me ability to reach and update all relevant data piece in NoSQL database.
+  - Using a detailed plan before starting coding
+  - Using a comprehensive API ( Spoonacular ) and environment variables for safety.
+  - Handling HTTP transactions with axios. 
+  - Planning and serving notifications via notifee in a mobile app.
+
+I used these technologies in the project:
+  - React Native
+  - React Navigator
+  - Firebase
+  - Notifee
+  - Axios
+  - Lottie
+  - Auth0
+
 # **Diyetim**
 
 ## Customer Needs:
@@ -57,27 +79,3 @@ Users should be able to create a diet and configure it according to meals nutrit
   1. My Diets Screen - Daily Diet Times Screen. (Top Bar Navigation) 
   2. Discover Meals (Stack Container)
   3. Profile Screen
-
------------------------------------------------
-- [x] Teknik - Firestore ayarlarını güncelle ve auth check et
-- [x] Teknik - Large Meal Container Calory hesabı yanlış.
-- [x] Performans iyileştirmeleri - Axios işlemlerini kontrol et
-- [-] Performans iyileştirmeleri - Dynamic Import dene
-- [] Görsel - Loading ve Error Animasyonları (Lottie)
-- [x] Görsel - React native vector icons kullan
-- [x] Görsel - Yemek detay sayfasını değiştir
-- [x] Görsel - Loading ve Error Animasyonları
-- [x] Görsel - Navigation style düzenle
-- [x] Görsel - Meal Information sayfasını diet sayfası gibi yap
-- [x] UI - Diyet planı eklerken karakter sınırı koy
-- [x] UI - Günün Menüsünü rastgele değil güne göre ayarla
-----------------------------------------------------------------
-1. Auth0 Entegrasyonu
-2. React Navigation, Nested Routes, Modal,
-2. Redux & Redux Persist
-3. Firebase Cloud Firestore NoSQL tecrübesi,
-4. Detaylı Rapor,
-5. Test yazmak
-6. Restyle, Theme
-7. API ile çalışmak
-8. Native tarafı yönetecek paketler Alarm notifications
